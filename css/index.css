@@ -25,6 +25,7 @@
 .todo-item-text {
     width: 80%;
     background-color: sandybrown;
+    line-height: 40px;
 }
 
 .todo-input {
