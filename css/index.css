@@ -1,0 +1,48 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.todo {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    background-color: aqua;
+    margin: 0 auto;
+    border: 1px grey solid;
+}
+
+.todo-item-text {
+    width: 80%;
+    background-color: sandybrown;
+}
+
+.todo-input {
+    width: 80%;
+    height: 100%;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    width: 10%;
+    height: 100%;
+    border: 1px #000 solid;
+}
+
+.btn-image {
+    width: auto;
+    height: 100%;
+}
