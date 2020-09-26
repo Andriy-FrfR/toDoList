@@ -11,12 +11,7 @@ document.addEventListener('DOMContentLoaded', showTasks);
 
 function showTasks() {
     for (let item of tasksArr) {
-        let task = document.createElement('div');
-
-        task.classList.add('todo-item');
-        task.innerHTML = item;
-
-        todo.append(task);
+        todo.insertAdjacentHTML('beforeend', item);
     }
 }
 
@@ -38,8 +33,6 @@ function todoHandler(event) {
     }
 }
 
-
-
 function createTask() {
     let newTaskHTML = `<div data-order="${order++}" class="todo-item">
     <div class="todo-item-text">${todoInput.value}</div>
@@ -52,14 +45,14 @@ function createTask() {
     </div>`;
     todo.insertAdjacentHTML('beforeend', newTaskHTML);
 
-    let lastTaskHTML = todo.lastChild.innerHTML;
-    tasksArr.push(lastTaskHTML);
+    tasksArr.push(newTaskHTML);
 }
 
 function deleteTask(target) {
     for (let i = 0; i < tasksArr.length; i++) {
-        if (tasksArr[i] === target.closest('.todo-item').innerHTML) {
+        if (tasksArr[i] === target.closest('.todo-item').outerHTML) {
             tasksArr.splice(i, 1);
+            break;
         }
     }
 
@@ -86,8 +79,9 @@ function changeTask(target) {
 }
 
 function confirmTask(target) {
-    let taskInput = target.closest('.todo-item').querySelector('.todo-input'),
-        confirmBtn = target.closest('.todo-item').querySelector('.confirm-btn');
+    let task = target.closest('.todo-item'),
+        taskInput = task.querySelector('.todo-input'),
+        confirmBtn = task.querySelector('.confirm-btn');
         
     let newText = document.createElement('div');    
     newText.classList.add('todo-item-text');
@@ -100,6 +94,12 @@ function confirmTask(target) {
     changeBtn.innerHTML = '<img src="./images/change-icon.png" alt="" class="btn-image">';
 
     confirmBtn.replaceWith(changeBtn);
+
+    for (let i = 0; i < tasksArr.length; i++)  {
+        if (tasksArr[i].includes(`data-order="${task.dataset.order}"`)) {
+            tasksArr[i] = task.outerHTML;
+        }
+    }
 }
 
 window.onbeforeunload = function() {
