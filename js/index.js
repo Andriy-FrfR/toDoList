@@ -34,6 +34,10 @@ function todoHandler(event) {
 }
 
 function createTask() {
+    if (!todoInput.value) {
+        return;
+    }
+
     let newTaskHTML = `<div data-order="${order++}" class="todo-item">
     <div class="todo-item-text">${todoInput.value}</div>
     <button class="todo-btn change-btn">
@@ -86,6 +90,10 @@ function confirmTask(target) {
     let newText = document.createElement('div');    
     newText.classList.add('todo-item-text');
     newText.innerHTML = taskInput.value;
+
+    if (!newText.innerHTML) {
+        return;
+    }
 
     taskInput.replaceWith(newText);
 
